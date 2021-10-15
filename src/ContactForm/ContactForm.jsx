@@ -1,13 +1,10 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import contactActions from '../redux/contact-app/contact-actions';
-import { useDispatch } from 'react-redux';
 import css from './ContactForm.module.css';
 
 const ContactForm = ({ formSubmitHandler }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const dispatch = useDispatch();
 
   const handleChangeName = event => {
     setName(event.currentTarget.value);
@@ -19,9 +16,7 @@ const ContactForm = ({ formSubmitHandler }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // old code
-    // formSubmitHandler({ name, number }); -VS-new=> dispatch(contactActions.formSubmitHandler({ name, number }));
-    dispatch(contactActions.formSubmitHandler({ name, number }));
+    formSubmitHandler({ name, number });
     resetState();
   };
 
@@ -67,13 +62,6 @@ const ContactForm = ({ formSubmitHandler }) => {
     </form>
   );
 };
-
-// const mapDispatchToProps = dispatch => ({
-//   formSubmitHandler: ({ name, number }) =>
-//     dispatch(contactActions.formSubmitHandler({ name, number })),
-// });
-
-// export default connect(null, mapDispatchToProps)(ContactForm);
 
 export default ContactForm;
 
