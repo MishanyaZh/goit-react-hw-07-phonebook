@@ -19,48 +19,6 @@ const App = () => {
   // setContacts(data);
   console.log(data);
 
-  // const changeFilter = e => {
-  //   setFilter(e.currentTarget.value);
-  // };
-
-  // const formSubmitHandler = ({ name, number }) => {
-  //   const newContact = {
-  //     name,
-  //     number,
-  //     id: uuidv4(),
-  //   };
-
-  //   setContacts(prevState => {
-  //     const doubleContact = prevState.find(contact =>
-  //       contact.name.toLowerCase().includes(name.toLowerCase()),
-  //     );
-
-  //     if (doubleContact && doubleContact.name.length === name.length) {
-  //       toast.error(`${name} is already in contacts`);
-  //       return [...prevState];
-  //     } else {
-  //       setContacts([newContact, ...prevState]);
-  //       toast.success(`${name} add to Contacts`, { icon: '👏' });
-  //     }
-  //   });
-  // };
-
-  // const deleteContact = (contactId, name) => {
-  //   setContacts(prevState =>
-  //     prevState.filter(contact => contact.id !== contactId),
-  //   );
-  //   toast.success(`${name} delete with Contacts!`);
-  // };
-
-  // const getVisibleContacts = () => {
-  //   const normalizedFilter = filter.toLowerCase();
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(normalizedFilter),
-  //   );
-  // };
-
-  // const filteredContacts = getVisibleContacts();
-
   return (
     <MContainer title="Phonebook">
       <Section>
@@ -71,7 +29,7 @@ const App = () => {
         <Filter />
         {data && <ContactList contacts={data} />}
         {isFetching && (
-          <Loader type="Rings" color="#00BFFF" height={80} width={80} />
+          <Loader type="Rings" color="#00BFFF" height={200} width={200} />
         )}
       </Section>
       <Toaster position="top-center" reverseOrder={false} />
