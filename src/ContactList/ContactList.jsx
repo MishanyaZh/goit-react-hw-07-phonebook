@@ -1,28 +1,16 @@
 import PropTypes from 'prop-types';
 import Loader from 'react-loader-spinner';
+import toast from 'react-hot-toast';
 import { useDeleteContactMutation } from '../redux/contact-app/contactsSlice';
-// import { getVisibleContacts } from '../redux/contact-app/contact-selector';
 import css from './ContactList.module.css';
 
 const ContactList = ({ contacts }) => {
-  // const { data, isFetching } = useFetchContactsQuery();
   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
 
-  // old
-  // const visibleContacts = (items, filter) => {
-  //   const normalizedFilter = filter.toLowerCase();
-
-  //   return items.filter(({ name }) =>
-  //     name.toLowerCase().includes(normalizedFilter),
-  //   );
-  // };
-
-  //   const deleteContact = (contactId, name) => {
-  //   setContacts(prevState =>
-  //     prevState.filter(contact => contact.id !== contactId),
-  //   );
-  //   toast.success(`${name} delete with Contacts!`);
-  // };
+  const contactDelete = (contactId, name) => {
+    deleteContact(contactId);
+    toast.success(`${name} delete with Contacts!`);
+  };
 
   return (
     <ul className={css.contactsList}>
@@ -32,15 +20,15 @@ const ContactList = ({ contacts }) => {
           <span>{number}</span>
           <span>
             <button
-              onClick={() => deleteContact(id)}
+              disabled={isDeleting}
+              onClick={() => contactDelete(id, name)}
               className={css.listButton}
               type="button"
             >
-              {isDeleting ? (
-                <Loader type="Rings" color="#00BFFF" height={50} width={50} />
-              ) : (
-                'delete'
+              {isDeleting && (
+                <Loader type="Rings" color="#00BFFF" height={20} width={20} />
               )}
+              delete
             </button>
           </span>
         </li>

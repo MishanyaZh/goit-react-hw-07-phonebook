@@ -9,7 +9,6 @@ const ContactForm = ({ formSubmitHandler }) => {
   const handleChangeName = event => {
     setName(event.currentTarget.value);
   };
-
   const handleChangeNumber = event => {
     setNumber(event.currentTarget.value);
   };
