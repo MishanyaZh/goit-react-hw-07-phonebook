@@ -5,6 +5,9 @@ import css from './ContactList.module.css';
 
 const ContactList = () => {
   const { data, isFetching } = useFetchContactsQuery();
+
+  // const visibleContacts = useSelector(getVisibleContacts);
+
   return (
     <ul className={css.contactsList}>
       {data.map(contacts => (

@@ -5,6 +5,10 @@ import {
   useCreateContactMutation,
   useFetchContactsQuery,
 } from '../redux/contact-app/contactsSlice';
+
+import { useDispatch } from 'react-redux';
+import contactActions from '../redux/contact-app/contact-actions';
+
 import toast from 'react-hot-toast';
 import css from './ContactForm.module.css';
 
@@ -14,6 +18,7 @@ const ContactForm = () => {
 
   const { data, isFetching } = useFetchContactsQuery();
   const [createContact] = useCreateContactMutation();
+  const dispatch = useDispatch();
 
   const handleChangeName = event => {
     setName(event.currentTarget.value);
@@ -24,29 +29,14 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    formSubmitHandler({ name, number });
+    // createContact(dispatch(contactActions.formSubmitHandler({ name, number })));
+    createContact({ name, number });
     resetState();
   };
 
   const resetState = () => {
     setName('');
     setNumber('');
-  };
-
-  const formSubmitHandler = ({ name, number }) => {
-    const newContact = {
-      name,
-      number,
-    };
-    const doubleContact = data.find(contact =>
-      contact.name.toLowerCase().includes(name.toLowerCase()),
-    );
-    if (doubleContact && doubleContact.name.length === name.length) {
-      return toast.error(`${name} is already in contacts`);
-    } else {
-      createContact(newContact);
-      toast.success(`${name} add to Contacts`, { icon: '👏' });
-    }
   };
 
   return (

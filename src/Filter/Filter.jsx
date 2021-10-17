@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import css from './Filter.module.css';
 
-const Filter = ({ onChangeFilter, value }) => {
-  const [filter, setFilter] = useState('');
+import { useSelector, useDispatch } from 'react-redux';
+import { getValue } from '../redux/contact-app/contact-selector';
+import contactActions from '../redux/contact-app/contact-actions';
 
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value);
-  };
+const Filter = () => {
+  const dispatch = useDispatch();
+
+  const value = useSelector(getValue);
+  const onChange = e => dispatch(contactActions.changeFilter(e.target.value));
 
   return (
     <label htmlFor={value.id} className={css.filter}>
@@ -17,7 +20,7 @@ const Filter = ({ onChangeFilter, value }) => {
         id={uuidv4()}
         className={css.input}
         value={value}
-        onChange={onChangeFilter}
+        onChange={onChange}
         type="text"
         name="filter"
         placeholder="find"

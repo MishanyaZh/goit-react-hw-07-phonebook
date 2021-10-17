@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import {
   useFetchContactsQuery,
   useCreateContactMutation,
@@ -14,7 +14,7 @@ import Section from './containers/Section/Section';
 import MContainer from './containers/MainContainer/MainContainer';
 
 const App = () => {
-  const [filter, setFilter] = useState('');
+  // const [filter, setFilter] = useState('');
 
   const { data, isFetching } = useFetchContactsQuery();
   // const [createContact] = useCreateContactMutation();
@@ -35,20 +35,20 @@ const App = () => {
   //   }
   // };
 
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value);
-  };
+  // const changeFilter = e => {
+  //   setFilter(e.currentTarget.value);
+  // };
 
-  const getVisibleContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    if (data) {
-      return data.filter(contact =>
-        contact.name.toLowerCase().includes(normalizedFilter),
-      );
-    }
-  };
+  // const getVisibleContacts = () => {
+  //   const normalizedFilter = filter.toLowerCase();
+  //   if (data) {
+  //     return data.filter(contact =>
+  //       contact.name.toLowerCase().includes(normalizedFilter),
+  //     );
+  //   }
+  // };
 
-  const filteredContacts = getVisibleContacts();
+  // const filteredContacts = getVisibleContacts();
 
   return (
     <MContainer title="Phonebook">
@@ -57,9 +57,15 @@ const App = () => {
       </Section>
 
       <Section title="Contacts">
-        <Filter onChangeFilter={changeFilter} value={filter} />
+        <Filter
+        // onChangeFilter={changeFilter} value={filter}
+        />
 
-        {data && <ContactList contacts={filteredContacts} />}
+        {data && (
+          <ContactList
+          // contacts={filteredContacts}
+          />
+        )}
         {isFetching && (
           <Loader
             type="Rings"
