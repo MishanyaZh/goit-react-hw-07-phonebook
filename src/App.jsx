@@ -17,23 +17,23 @@ const App = () => {
   const [filter, setFilter] = useState('');
 
   const { data, isFetching } = useFetchContactsQuery();
-  const [createContact] = useCreateContactMutation();
+  // const [createContact] = useCreateContactMutation();
 
-  const formSubmitHandler = ({ name, number }) => {
-    const newContact = {
-      name,
-      number,
-    };
-    const doubleContact = data.find(contact =>
-      contact.name.toLowerCase().includes(name.toLowerCase()),
-    );
-    if (doubleContact && doubleContact.name.length === name.length) {
-      return toast.error(`${name} is already in contacts`);
-    } else {
-      createContact(newContact);
-      toast.success(`${name} add to Contacts`, { icon: '👏' });
-    }
-  };
+  // const formSubmitHandler = ({ name, number }) => {
+  //   const newContact = {
+  //     name,
+  //     number,
+  //   };
+  //   const doubleContact = data.find(contact =>
+  //     contact.name.toLowerCase().includes(name.toLowerCase()),
+  //   );
+  //   if (doubleContact && doubleContact.name.length === name.length) {
+  //     return toast.error(`${name} is already in contacts`);
+  //   } else {
+  //     createContact(newContact);
+  //     toast.success(`${name} add to Contacts`, { icon: '👏' });
+  //   }
+  // };
 
   const changeFilter = e => {
     setFilter(e.currentTarget.value);
@@ -53,7 +53,7 @@ const App = () => {
   return (
     <MContainer title="Phonebook">
       <Section>
-        <ContactForm formSubmitHandler={formSubmitHandler} />
+        <ContactForm />
       </Section>
 
       <Section title="Contacts">

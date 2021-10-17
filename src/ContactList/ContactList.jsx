@@ -1,12 +1,14 @@
-import PropTypes from 'prop-types';
+import PropTypes, { number } from 'prop-types';
+import { useFetchContactsQuery } from '../redux/contact-app/contactsSlice';
 import ContactItem from '../ContactItem/ContactItem.jsx';
 import css from './ContactList.module.css';
 
-const ContactList = ({ contacts }) => {
+const ContactList = () => {
+  const { data, isFetching } = useFetchContactsQuery();
   return (
     <ul className={css.contactsList}>
-      {contacts.map(contact => (
-        <ContactItem key={contact.id} {...contact} />
+      {data.map(contacts => (
+        <ContactItem key={contacts.id} {...contacts} />
         // <li key={id} className={css.contactsItem}>
         //   <span>{name}:</span>
         //   <span>{number}</span>

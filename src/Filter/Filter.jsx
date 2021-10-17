@@ -1,8 +1,15 @@
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import css from './Filter.module.css';
 
 const Filter = ({ onChangeFilter, value }) => {
+  const [filter, setFilter] = useState('');
+
+  const changeFilter = e => {
+    setFilter(e.currentTarget.value);
+  };
+
   return (
     <label htmlFor={value.id} className={css.filter}>
       <p className={css.filterName}>Find contacts by name</p>

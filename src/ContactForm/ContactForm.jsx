@@ -1,10 +1,19 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+
+import {
+  useCreateContactMutation,
+  useFetchContactsQuery,
+} from '../redux/contact-app/contactsSlice';
+import toast from 'react-hot-toast';
 import css from './ContactForm.module.css';
 
-const ContactForm = ({ formSubmitHandler }) => {
+const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const { data, isFetching } = useFetchContactsQuery();
+  const [createContact] = useCreateContactMutation();
 
   const handleChangeName = event => {
     setName(event.currentTarget.value);
@@ -22,6 +31,22 @@ const ContactForm = ({ formSubmitHandler }) => {
   const resetState = () => {
     setName('');
     setNumber('');
+  };
+
+  const formSubmitHandler = ({ name, number }) => {
+    const newContact = {
+      name,
+      number,
+    };
+    const doubleContact = data.find(contact =>
+      contact.name.toLowerCase().includes(name.toLowerCase()),
+    );
+    if (doubleContact && doubleContact.name.length === name.length) {
+      return toast.error(`${name} is already in contacts`);
+    } else {
+      createContact(newContact);
+      toast.success(`${name} add to Contacts`, { icon: '👏' });
+    }
   };
 
   return (
