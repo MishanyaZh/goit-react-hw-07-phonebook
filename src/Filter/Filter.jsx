@@ -2,36 +2,38 @@ import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import css from './Filter.module.css';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { getValue } from '../redux/contact-app/contact-selector';
-import contactActions from '../redux/contact-app/contact-actions';
+import ContactList from '../ContactList/ContactList';
 
 const Filter = () => {
-  const dispatch = useDispatch();
+  const [filter, setFilter] = useState('');
 
-  const value = useSelector(getValue);
-  const onChange = e => dispatch(contactActions.changeFilter(e.target.value));
+  const onChangeFilter = e => {
+    setFilter(e.currentTarget.value);
+  };
 
   return (
-    <label htmlFor={value.id} className={css.filter}>
-      <p className={css.filterName}>Find contacts by name</p>
-      <input
-        id={uuidv4()}
-        className={css.input}
-        value={value}
-        onChange={onChange}
-        type="text"
-        name="filter"
-        placeholder="find"
-        autoComplete="off"
-      />
-    </label>
+    <div>
+      <label htmlFor={filter.id} className={css.filter}>
+        <p className={css.filterName}>Find contacts by name</p>
+        <input
+          id={uuidv4()}
+          className={css.input}
+          value={filter}
+          onChange={onChangeFilter}
+          type="text"
+          name="filter"
+          placeholder="find"
+          autoComplete="off"
+        />
+      </label>
+
+      <ContactList filter={filter} />
+    </div>
   );
 };
 export default Filter;
 
-Filter.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-};
+// Filter.propTypes = {
+//   value: PropTypes.string,
+//   onChange: PropTypes.func,
+// };

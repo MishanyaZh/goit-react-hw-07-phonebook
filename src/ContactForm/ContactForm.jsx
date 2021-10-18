@@ -1,13 +1,10 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import {
   useCreateContactMutation,
   useFetchContactsQuery,
 } from '../redux/contact-app/contactsSlice';
-
-import { useDispatch } from 'react-redux';
-import contactActions from '../redux/contact-app/contact-actions';
 
 import toast from 'react-hot-toast';
 import css from './ContactForm.module.css';
@@ -16,9 +13,8 @@ const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const { data, isFetching } = useFetchContactsQuery();
   const [createContact] = useCreateContactMutation();
-  const dispatch = useDispatch();
+  const { data } = useFetchContactsQuery();
 
   const handleChangeName = event => {
     setName(event.currentTarget.value);
@@ -29,9 +25,20 @@ const ContactForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    // createContact(dispatch(contactActions.formSubmitHandler({ name, number })));
-    createContact({ name, number });
-    resetState();
+    const doubleContact = data.find(contact =>
+      contact.name.toLowerCase().includes(name.toLowerCase()),
+    );
+
+    const variable = doubleContact && doubleContact.name.length === name.length;
+
+    if (variable) {
+      toast.error(`${name} is already in contacts`);
+      return resetState();
+    } else {
+      toast.success(`${name} add to Contacts`, { icon: '👏' });
+      createContact({ name, number });
+      resetState();
+    }
   };
 
   const resetState = () => {
@@ -79,7 +86,7 @@ const ContactForm = () => {
 
 export default ContactForm;
 
-ContactForm.propTypes = {
-  formSubmitHandler: PropTypes.func,
-  handleChange: PropTypes.string,
-};
+// ContactForm.propTypes = {
+//   formSubmitHandler: PropTypes.func,
+//   handleChange: PropTypes.string,
+// };
