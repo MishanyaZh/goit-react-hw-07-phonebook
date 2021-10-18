@@ -1,3 +1,8 @@
+------------------------R T K  Q u e r y--------------------
+
+--------------------------Redux Toolkit---------------------
+https://redux-toolkit.js.org/rtk-query/overview
+
 # Getting Started with Create React App
 
 This project was bootstrapped with
