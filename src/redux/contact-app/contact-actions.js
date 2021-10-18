@@ -1,4 +1,6 @@
-// import { createAction } from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
+export const changeFilter = createAction('contact/changeFilter');
+
 // import { v4 as uuidv4 } from 'uuid';
 
 // const formSubmitHandler = createAction('contact/add', data => ({

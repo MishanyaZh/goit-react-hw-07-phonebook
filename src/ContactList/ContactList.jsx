@@ -1,11 +1,13 @@
-import PropTypes from 'prop-types';
+import { getFilterFromState } from '../redux/contact-app/contact-selector';
+import { useSelector } from 'react-redux';
 import { useFetchContactsQuery } from '../redux/contact-app/contactsSlice';
 import ContactItem from '../ContactItem/ContactItem.jsx';
 import Loader from 'react-loader-spinner';
 import css from './ContactList.module.css';
 
-const ContactList = ({ filter }) => {
+const ContactList = () => {
   const { data, isFetching } = useFetchContactsQuery();
+  const filter = useSelector(getFilterFromState);
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
@@ -15,7 +17,6 @@ const ContactList = ({ filter }) => {
       );
     }
   };
-
   const filteredContacts = getVisibleContacts();
 
   return (
@@ -38,9 +39,3 @@ const ContactList = ({ filter }) => {
 };
 
 export default ContactList;
-
-ContactList.propTypes = {
-  filter: PropTypes.string,
-  // data: PropTypes.array,
-  // onDeleteContact: PropTypes.func,
-};

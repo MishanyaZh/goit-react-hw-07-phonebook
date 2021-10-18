@@ -1,4 +1,3 @@
-// import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import {
@@ -85,8 +84,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-
-// ContactForm.propTypes = {
-//   formSubmitHandler: PropTypes.func,
-//   handleChange: PropTypes.string,
-// };
