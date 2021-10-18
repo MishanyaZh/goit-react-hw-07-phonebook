@@ -7,6 +7,11 @@
   flex-direction: column;
 }
 
+.box {
+  display: block;
+  margin: 0 auto;
+}
+
 /* .contactsItem {
   display: flex;
   justify-content: space-between;

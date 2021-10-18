@@ -12,7 +12,6 @@ const App = () => {
       <Section>
         <ContactForm />
       </Section>
-
       <Section title="Contacts">
         <Filter />
         <ContactList />

@@ -22,13 +22,15 @@ const ContactList = () => {
   return (
     <ul className={css.contactsList}>
       {isFetching && (
-        <Loader
-          type="Rings"
-          color="#00BFFF"
-          height={100}
-          width={100}
-          position="center"
-        />
+        <div className={css.box}>
+          <Loader
+            type="Rings"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            position="center"
+          />
+        </div>
       )}
       {data &&
         filteredContacts.map(contacts => (
