@@ -1,6 +1,6 @@
 // import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
-import { changeFilter } from '../redux/contact-app/contact-actions';
+import { changeFilter } from '../redux/contacts-app/contacts-actions';
 import css from './Filter.module.css';
 
 const Filter = () => {

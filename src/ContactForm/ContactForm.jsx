@@ -1,9 +1,9 @@
 import { useState } from 'react';
-
+// import Loader from 'react-loader-spinner';
 import {
   useCreateContactMutation,
   useFetchContactsQuery,
-} from '../redux/contact-app/contactsSlice';
+} from '../redux/contacts-app/contacts-operations';
 
 import toast from 'react-hot-toast';
 import css from './ContactForm.module.css';
@@ -27,9 +27,7 @@ const ContactForm = () => {
     const doubleContact = data.find(contact =>
       contact.name.toLowerCase().includes(name.toLowerCase()),
     );
-
     const variable = doubleContact && doubleContact.name.length === name.length;
-
     if (variable) {
       toast.error(`${name} is already in contacts`);
       return resetState();

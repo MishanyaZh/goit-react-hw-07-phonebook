@@ -3,9 +3,9 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { combineReducers } from 'redux';
 // mozhna bez userReducer (delete import to usersReducer)
 // import { usersReducer } from './contact-app/usersSlice';
-import { contactsApi } from './contact-app/contactsSlice';
+import { contactsApi } from './contacts-app/contacts-operations';
 // import contactReducer from './contact-app/contact-reducer';
-import { filter } from './contact-app/contact-reducer';
+import { filter } from './contacts-app/contacts-reducers';
 
 const contacts = combineReducers({
   [contactsApi.reducerPath]: contactsApi.reducer,

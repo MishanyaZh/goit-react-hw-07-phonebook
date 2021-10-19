@@ -30,7 +30,6 @@ export const contactsApi = createApi({
 });
 
 export const {
-  useGetContactByNameMutation,
   useFetchContactsQuery,
   useDeleteContactMutation,
   useCreateContactMutation,

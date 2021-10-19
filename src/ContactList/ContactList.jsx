@@ -1,6 +1,9 @@
-import { getFilterFromState } from '../redux/contact-app/contact-selector';
 import { useSelector } from 'react-redux';
-import { useFetchContactsQuery } from '../redux/contact-app/contactsSlice';
+import {
+  getFilterFromState,
+  getVisibleContacts,
+} from '../redux/contacts-app/contacts-selectors';
+import { useFetchContactsQuery } from '../redux/contacts-app/contacts-operations';
 import ContactItem from '../ContactItem/ContactItem.jsx';
 import Loader from 'react-loader-spinner';
 import css from './ContactList.module.css';
@@ -9,15 +12,7 @@ const ContactList = () => {
   const { data, isFetching } = useFetchContactsQuery();
   const filter = useSelector(getFilterFromState);
 
-  const getVisibleContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
-    if (data) {
-      return data.filter(contact =>
-        contact.name.toLowerCase().includes(normalizedFilter),
-      );
-    }
-  };
-  const filteredContacts = getVisibleContacts();
+  const filteredContacts = getVisibleContacts({ data, filter });
 
   return (
     <ul className={css.contactsList}>

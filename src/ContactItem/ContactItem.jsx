@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useDeleteContactMutation } from '../redux/contact-app/contactsSlice';
+import { useDeleteContactMutation } from '../redux/contacts-app/contacts-operations';
 import Loader from 'react-loader-spinner';
 import toast from 'react-hot-toast';
 import css from './ContactItem.module.css';
